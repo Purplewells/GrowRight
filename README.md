@@ -1,9 +1,9 @@
-# 📄 Business Proposal: Fertiliser & Input Calculator USSD Platform
+# 📄 Fertiliser & Input Calculator USSD Platform Specification
 
-## 🏷️ Project Name
-**GrowRight – USSD Fertiliser and Seed Recommendation Platform**
+## Project Name
+   **GrowRight – USSD Fertiliser and Seed Recommendation Platform**
 
-## 🧩 Executive Summary
+## Executive Summary
 
 GrowRight Assist is an inclusive, mobile-first platform that empowers smallholder farmers by delivering fertiliser and seed input recommendations through an intuitive USSD interface. Farmers enter their land size and crop type, and instantly receive SMS-based guidance on the optimal quantity of inputs required, application timing, and nearby agro-suppliers.
 
@@ -13,7 +13,7 @@ We are seeking strategic partnerships and investment to launch, scale, and deepe
 
 ---
 
-## 🎯 Problem Statement
+## Problem Statement
 
 Over 70% of smallholder farmers in sub-Saharan Africa operate without access to:
 - Technical agronomic guidance
