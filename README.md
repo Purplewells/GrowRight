@@ -1,19 +1,18 @@
-# 📄 Fertiliser & Input Calculator USSD Platform Specification
+# Fertiliser & Input Calculator USSD Platform Specification
 
-## Project Name
-   **GrowRight – USSD Fertiliser and Seed Recommendation Platform**
+## Project Name: GrowRight  
 
-## Executive Summary
+### Executive Summary
 
 GrowRight Assist is an inclusive, mobile-first platform that empowers smallholder farmers by delivering fertiliser and seed input recommendations through an intuitive USSD interface. Farmers enter their land size and crop type, and instantly receive SMS-based guidance on the optimal quantity of inputs required, application timing, and nearby agro-suppliers.
 
 This solution addresses input misapplication in rural farming communities, driving productivity, reducing cost, and building digital bridges between farmers and agricultural value chains.
 
-We are seeking strategic partnerships and investment to launch, scale, and deepen our impact in rural Africa.
+We seek strategic partnerships and investment to launch, scale, and deepen our impact in rural Africa.
 
 ---
 
-## Problem Statement
+### Problem Statement
 
 Over 70% of smallholder farmers in sub-Saharan Africa operate without access to:
 - Technical agronomic guidance
@@ -28,15 +27,13 @@ This results in:
 
 ---
 
-## 💡 Our Solution
+### 💡 Our Solution
 
 A USSD and SMS-based mobile calculator that:
 - Asks farmers for crop type and land size
 - Calculates precise fertiliser/seed requirement
-- Sends SMS with input details and nearest verified suppliers
+- Sends SMS with input details and the nearest verified suppliers
 - Offers multilingual support and works on any GSM phone
-
----
 
 ## 📱 Product Features
 
@@ -46,10 +43,8 @@ A USSD and SMS-based mobile calculator that:
 | SMS Recommendations           | Instant delivery of dosage and supplier info     |
 | Multi-crop Support            | Start with maize, rice, beans, expand gradually  |
 | Supplier Directory            | Matches farmer with nearest agro-dealers         |
-| Regional Language Support     | Supports Hausa, Yoruba, Swahili, etc.            |
+| Regional Language Support     | Supports Hausa, Yoruba, Swahili, etc..            |
 | Agro-Tips & Notifications     | Seasonal planting or dosage reminders via SMS    |
-
----
 
 ## 🎯 Target Market
 
@@ -57,9 +52,7 @@ A USSD and SMS-based mobile calculator that:
 - **User Profile**: Smallholder farmers (1-5 hectares)
 - **Partners**: Agro-dealers, NGOs, Mobile Network Operators, Ministries of Agriculture
 
----
-
-## 🔁 Revenue & Business Model
+### 🔁 Revenue & Business Model
 
 1. **Freemium for Farmers** (basic use via USSD free)
 2. **Dealer Subscription Listings**
@@ -71,25 +64,19 @@ A USSD and SMS-based mobile calculator that:
 5. **Data Licensing**
    - Aggregated, anonymised farming data for research and supply chain intelligence
 
----
-
-## 📈 Market Opportunity
+### 📈 Market Opportunity
 
 - **Over 33M smallholder farmers in Nigeria**
 - USSD-based agri tools have >70% adoption success rate
 - Fertiliser market in Africa expected to grow 6.8% CAGR (2023–2027)
 
----
-
-## 👥 Team
+### 👥 Team
 
 - **Founder/Project Lead**: Benjamin Ohene-Adu, Software Developer & AgriTech Advocate
 - **Technical Lead**: Edwin Ohene-Adu
 - **Advisors**: Agricultural extension officers, USSD consultants, agronomists
 
----
-
-## 💰 Funding Requirements
+### 💰 Funding Requirements
 
 We are seeking:
 - **$100,000 seed investment** for:
@@ -99,9 +86,7 @@ We are seeking:
   - Initial staff hires (support, ops, regional reps)
   - Regulatory compliance
 
----
-
-## 🤝 Partnership Opportunities
+### 🤝 Partnership Opportunities
 
 We welcome collaborations with:
 - **Input companies** (sponsorships, API integrations)
@@ -109,23 +94,17 @@ We welcome collaborations with:
 - **NGOs & Extension Services** (farmer training & scaling)
 - **Government & Ministries** (policy support and adoption)
 
----
-
-## 🔮 Vision
+### 🔮 Vision
 
 To become the go-to digital companion for every African farmer — enabling them to make data-informed input decisions, improve yield, and unlock economic potential — right from any mobile phone.
 
----
-
-## 📞 Contact
+### 📞 Contact
 
 **Benjamin Ohene-Adu**  
 Founder – GrowRight Assist  
 📧 info@inceptatechnologies.com  
 📱 +234 XXX XXX XXXX  
 🌐 [https://github.com/purplewells]
-
----
 
 > *“Farming isn’t guesswork — with the right tools, it’s science. Let’s put that science into every farmer’s hand.”*
 
