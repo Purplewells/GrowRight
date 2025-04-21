@@ -1,6 +1,5 @@
-# Fertiliser & Input Calculator USSD Platform Specification
-
-## Project Name: GrowRight  
+# Project Name: GrowRight  
+## Fertiliser & Input Calculator USSD Platform Specification
 
 ### Executive Summary
 
@@ -9,8 +8,6 @@ GrowRight Assist is an inclusive, mobile-first platform that empowers smallholde
 This solution addresses input misapplication in rural farming communities, driving productivity, reducing cost, and building digital bridges between farmers and agricultural value chains.
 
 We seek strategic partnerships and investment to launch, scale, and deepen our impact in rural Africa.
-
----
 
 ### Problem Statement
 
@@ -24,8 +21,6 @@ This results in:
 - Increased cost, poor yields
 - Environmental degradation
 - Reliance on anecdotal advice
-
----
 
 ### 💡 Our Solution
 
