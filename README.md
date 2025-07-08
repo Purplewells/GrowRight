@@ -5,7 +5,8 @@
 
 GrowRight Assist is an inclusive, mobile-first platform that empowers smallholder farmers by delivering fertiliser and seed input recommendations through an intuitive USSD interface. Farmers enter their land size and crop type, and instantly receive SMS-based guidance on the optimal quantity of inputs required, application timing, and nearby agro-suppliers.
 
-This solution addresses input misapplication in rural farming communities, driving productivity, reducing cost, and building digital bridges between farmers and agricultural value chains.
+GrowRight bridges the gap between agricultural knowledge, digital access, and market connectivity — empowering users to grow smarter, trade better, and thrive sustainably, whilst addressing input misapplication in rural farming communities, driving productivity, reducing cost, and building digital bridges between farmers and agricultural value chains.
+
 
 We seek strategic partnerships and investment to launch, scale, and deepen our impact in rural Africa.
 
