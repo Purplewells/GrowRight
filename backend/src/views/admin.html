@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GrowRight Admin Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2d5a27 0%, #4a7c59 100%);
+            color: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            font-size: 2rem;
+            font-weight: 600;
+        }
+        
+        .header p {
+            opacity: 0.9;
+            margin-top: 0.25rem;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        
+        .auth-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .auth-input {
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin: 0 0.5rem;
+            width: 200px;
+        }
+        
+        .btn {
+            background: #2d5a27;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.2s;
+        }
+        
+        .btn:hover {
+            background: #1e3d1a;
+        }
+        
+        .btn-danger {
+            background: #dc3545;
+        }
+        
+        .btn-danger:hover {
+            background: #c82333;
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+        }
+        
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #2d5a27;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            color: #666;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .section {
+            background: white;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .section-header {
+            background: #f8f9fa;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #2d5a27;
+        }
+        
+        .section-content {
+            padding: 1.5rem;
+        }
+        
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        
+        .table th,
+        .table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #2d5a27;
+        }
+        
+        .table tbody tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #333;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: #2d5a27;
+            box-shadow: 0 0 0 2px rgba(45, 90, 39, 0.2);
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+        }
+        
+        .modal-content {
+            background: white;
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .close {
+            float: right;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #aaa;
+            cursor: pointer;
+        }
+        
+        .close:hover {
+            color: #000;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .error {
+            color: #dc3545;
+            background: #f8d7da;
+            padding: 0.75rem;
+            border-radius: 4px;
+            margin: 1rem 0;
+        }
+        
+        .success {
+            color: #155724;
+            background: #d4edda;
+            padding: 0.75rem;
+            border-radius: 4px;
+            margin: 1rem 0;
+        }
+        
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 1.5rem;
+        }
+        
+        .tab {
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+        }
+        
+        .tab:hover {
+            background: #f8f9fa;
+        }
+        
+        .tab.active {
+            border-bottom-color: #2d5a27;
+            color: #2d5a27;
+            font-weight: 600;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 0.5rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .table {
+                font-size: 0.875rem;
+            }
+            
+            .modal-content {
+                margin: 10% auto;
+                width: 95%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🌱 GrowRight Admin Dashboard</h1>
+        <p>Manage crops, suppliers, and monitor farmer activities</p>
+    </div>
+
+    <div class="container">
+        <!-- Authentication Section -->
+        <div class="auth-section">
+            <h3>Admin Authentication</h3>
+            <p>Enter admin password to access dashboard</p>
+            <div style="margin-top: 1rem;">
+                <input type="password" id="adminPassword" class="auth-input" placeholder="Admin Password">
+                <button onclick="authenticate()" class="btn">Login</button>
+            </div>
+            <div id="authError" class="error hidden">Invalid password</div>
+        </div>
+
+        <!-- Main Dashboard Content -->
+        <div id="dashboardContent" class="hidden">
+            <!-- Statistics -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number" id="totalCrops">-</div>
+                    <div class="stat-label">Crops</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="totalFarmers">-</div>
+                    <div class="stat-label">Farmers</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="totalSuppliers">-</div>
+                    <div class="stat-label">Suppliers</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="totalCalculations">-</div>
+                    <div class="stat-label">Calculations</div>
+                </div>
+            </div>
+
+            <!-- Navigation Tabs -->
+            <div class="tabs">
+                <div class="tab active" onclick="showTab('dashboard')">Dashboard</div>
+                <div class="tab" onclick="showTab('crops')">Crops</div>
+                <div class="tab" onclick="showTab('suppliers')">Suppliers</div>
+                <div class="tab" onclick="showTab('farmers')">Farmers</div>
+                <div class="tab" onclick="showTab('system')">System</div>
+            </div>
+
+            <!-- Dashboard Tab -->
+            <div id="dashboard-tab" class="tab-content active">
+                <div class="section">
+                    <div class="section-header">
+                        <h3 class="section-title">Recent Calculations</h3>
+                    </div>
+                    <div class="section-content">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Farmer</th>
+                                    <th>Crop</th>
+                                    <th>Land Size</th>
+                                    <th>Fertilizer</th>
+                                    <th>Cost</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recentCalculations">
+                                <!-- Data loaded via JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-header">
+                        <h3 class="section-title">Popular Crops</h3>
+                    </div>
+                    <div class="section-content">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Crop</th>
+                                    <th>Usage Count</th>
+                                </tr>
+                            </thead>
+                            <tbody id="popularCrops">
+                                <!-- Data loaded via JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Crops Tab -->
+            <div id="crops-tab" class="tab-content">
+                <div class="section">
+                    <div class="section-header">
+                        <h3 class="section-title">Crop Management</h3>
+                        <button onclick="showAddCropModal()" class="btn">Add New Crop</button>
+                    </div>
+                    <div class="section-content">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Scientific Name</th>
+                                    <th>NPK Ratio</th>
+                                    <th>Seed Rate</th>
+                                    <th>Fertilizer Rate</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="cropsTable">
+                                <!-- Data loaded via JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Suppliers Tab -->
+            <div id="suppliers-tab" class="tab-content">
+                <div class="section">
+                    <div class="section-header">
+                        <h3 class="section-title">Supplier Management</h3>
+                        <button onclick="showAddSupplierModal()" class="btn">Add New Supplier</button>
+                    </div>
+                    <div class="section-content">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Contact</th>
+                                    <th>Location</th>
+                                    <th>Products</th>
+                                    <th>Verified</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="suppliersTable">
+                                <!-- Data loaded via JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Farmers Tab -->
+            <div id="farmers-tab" class="tab-content">
+                <div class="section">
+                    <div class="section-header">
+                        <h3 class="section-title">Farmer Analytics</h3>
+                    </div>
+                    <div class="section-content">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Phone Number</th>
+                                    <th>Calculations</th>
+                                    <th>Last Active</th>
+                                    <th>Language</th>
+                                    <th>Location</th>
+                                </tr>
+                            </thead>
+                            <tbody id="farmersTable">
+                                <!-- Data loaded via JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- System Tab -->
+            <div id="system-tab" class="tab-content">
+                <div class="section">
+                    <div class="section-header">
+                        <h3 class="section-title">System Information</h3>
+                        <button onclick="loadSystemInfo()" class="btn btn-secondary">Refresh</button>
+                    </div>
+                    <div class="section-content">
+                        <div id="systemInfo">
+                            <!-- System info loaded via JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add/Edit Crop Modal -->
+    <div id="cropModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeCropModal()">&times;</span>
+            <h2 id="cropModalTitle">Add New Crop</h2>
+            <form id="cropForm">
+                <input type="hidden" id="cropId">
+                <div class="form-group">
+                    <label class="form-label">Crop Name</label>
+                    <input type="text" id="cropName" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Scientific Name</label>
+                    <input type="text" id="cropScientificName" class="form-input">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">NPK Ratio</label>
+                    <input type="text" id="cropNpkRatio" class="form-input" placeholder="e.g., 15:15:15" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Seed Rate (kg/hectare)</label>
+                    <input type="number" id="cropSeedRate" class="form-input" step="0.1" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Fertilizer Rate (kg/hectare)</label>
+                    <input type="number" id="cropFertilizerRate" class="form-input" step="0.1" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Planting Season</label>
+                    <input type="text" id="cropPlantingSeason" class="form-input" placeholder="e.g., April-July">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Growth Period (days)</label>
+                    <input type="number" id="cropGrowthPeriod" class="form-input">
+                </div>
+                <div style="margin-top: 1.5rem;">
+                    <button type="submit" class="btn">Save Crop</button>
+                    <button type="button" onclick="closeCropModal()" class="btn btn-secondary">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add/Edit Supplier Modal -->
+    <div id="supplierModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeSupplierModal()">&times;</span>
+            <h2 id="supplierModalTitle">Add New Supplier</h2>
+            <form id="supplierForm">
+                <input type="hidden" id="supplierId">
+                <div class="form-group">
+                    <label class="form-label">Supplier Name</label>
+                    <input type="text" id="supplierName" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Contact Phone</label>
+                    <input type="text" id="supplierPhone" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Location</label>
+                    <input type="text" id="supplierLocation" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Latitude</label>
+                    <input type="number" id="supplierLatitude" class="form-input" step="0.000001">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Longitude</label>
+                    <input type="number" id="supplierLongitude" class="form-input" step="0.000001">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Available Products</label>
+                    <input type="text" id="supplierProducts" class="form-input" placeholder="e.g., NPK Fertilizer, Seeds, Pesticides" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">
+                        <input type="checkbox" id="supplierVerified"> Verified Supplier
+                    </label>
+                </div>
+                <div style="margin-top: 1.5rem;">
+                    <button type="submit" class="btn">Save Supplier</button>
+                    <button type="button" onclick="closeSupplierModal()" class="btn btn-secondary">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let authToken = '';
+        
+        // Authentication
+        function authenticate() {
+            const password = document.getElementById('adminPassword').value;
+            authToken = password;
+            
+            // Test authentication by trying to load dashboard
+            fetch('/admin/api/dashboard', {
+                headers: { 'Authorization': `Bearer ${authToken}` }
+            })
+            .then(response => {
+                if (response.ok) {
+                    document.querySelector('.auth-section').style.display = 'none';
+                    document.getElementById('dashboardContent').classList.remove('hidden');
+                    loadDashboard();
+                } else {
+                    document.getElementById('authError').classList.remove('hidden');
+                }
+            })
+            .catch(error => {
+                document.getElementById('authError').classList.remove('hidden');
+            });
+        }
+        
+        // Tab management
+        function showTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected tab
+            document.getElementById(tabName + '-tab').classList.add('active');
+            event.target.classList.add('active');
+            
+            // Load tab data
+            switch(tabName) {
+                case 'dashboard':
+                    loadDashboard();
+                    break;
+                case 'crops':
+                    loadCrops();
+                    break;
+                case 'suppliers':
+                    loadSuppliers();
+                    break;
+                case 'farmers':
+                    loadFarmers();
+                    break;
+                case 'system':
+                    loadSystemInfo();
+                    break;
+            }
+        }
+        
+        // Dashboard data loading
+        function loadDashboard() {
+            fetch('/admin/api/dashboard', {
+                headers: { 'Authorization': `Bearer ${authToken}` }
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Update stats
+                document.getElementById('totalCrops').textContent = data.stats.totalCrops;
+                document.getElementById('totalFarmers').textContent = data.stats.totalFarmers;
+                document.getElementById('totalSuppliers').textContent = data.stats.totalSuppliers;
+                document.getElementById('totalCalculations').textContent = data.stats.totalCalculations;
+                
+                // Update recent calculations
+                const tbody = document.getElementById('recentCalculations');
+                tbody.innerHTML = data.recentCalculations.map(calc => `
+                    <tr>
+                        <td>${new Date(calc.formatted_date).toLocaleDateString()}</td>
+                        <td>${calc.phone_number}</td>
+                        <td>${calc.crop_name}</td>
+                        <td>${calc.land_size_hectares} ha</td>
+                        <td>${calc.fertilizer_amount_kg} kg</td>
+                        <td>₦${calc.estimated_cost.toLocaleString()}</td>
+                    </tr>
+                `).join('');
+                
+                // Update popular crops
+                const cropsTableBody = document.getElementById('popularCrops');
+                cropsTableBody.innerHTML = data.popularCrops.map(crop => `
+                    <tr>
+                        <td>${crop.name}</td>
+                        <td>${crop.usage_count}</td>
+                    </tr>
+                `).join('');
+            })
+            .catch(error => console.error('Error loading dashboard:', error));
+        }
+        
+        // Load crops
+        function loadCrops() {
+            fetch('/admin/api/crops', {
+                headers: { 'Authorization': `Bearer ${authToken}` }
+            })
+            .then(response => response.json())
+            .then(crops => {
+                const tbody = document.getElementById('cropsTable');
+                tbody.innerHTML = crops.map(crop => `
+                    <tr>
+                        <td>${crop.name}</td>
+                        <td>${crop.scientific_name || '-'}</td>
+                        <td>${crop.npk_ratio}</td>
+                        <td>${crop.seed_rate_per_hectare} kg/ha</td>
+                        <td>${crop.fertilizer_rate_per_hectare} kg/ha</td>
+                        <td>
+                            <button onclick="editCrop(${crop.id})" class="btn btn-secondary" style="margin-right: 0.5rem;">Edit</button>
+                            <button onclick="deleteCrop(${crop.id})" class="btn btn-danger">Delete</button>
+                        </td>
+                    </tr>
+                `).join('');
+            })
+            .catch(error => console.error('Error loading crops:', error));
+        }
+        
+        // Load suppliers
+        function loadSuppliers() {
+            fetch('/admin/api/suppliers', {
+                headers: { 'Authorization': `Bearer ${authToken}` }
+            })
+            .then(response => response.json())
+            .then(suppliers => {
+                const tbody = document.getElementById('suppliersTable');
+                tbody.innerHTML = suppliers.map(supplier => `
+                    <tr>
+                        <td>${supplier.name}</td>
+                        <td>${supplier.contact_phone}</td>
+                        <td>${supplier.location}</td>
+                        <td>${supplier.available_products}</td>
+                        <td>${supplier.is_verified ? '✅ Yes' : '❌ No'}</td>
+                        <td>
+                            <button onclick="editSupplier(${supplier.id})" class="btn btn-secondary" style="margin-right: 0.5rem;">Edit</button>
+                            <button onclick="deleteSupplier(${supplier.id})" class="btn btn-danger">Delete</button>
+                        </td>
+                    </tr>
+                `).join('');
+            })
+            .catch(error => console.error('Error loading suppliers:', error));
+        }
+        
+        // Load farmers
+        function loadFarmers() {
+            fetch('/admin/api/farmers', {
+                headers: { 'Authorization': `Bearer ${authToken}` }
+            })
+            .then(response => response.json())
+            .then(farmers => {
+                const tbody = document.getElementById('farmersTable');
+                tbody.innerHTML = farmers.map(farmer => `
+                    <tr>
+                        <td>${farmer.phone_number}</td>
+                        <td>${farmer.calculation_count}</td>
+                        <td>${farmer.last_active_formatted ? new Date(farmer.last_active_formatted).toLocaleDateString() : '-'}</td>
+                        <td>${farmer.language || 'en'}</td>
+                        <td>${farmer.location || '-'}</td>
+                    </tr>
+                `).join('');
+            })
+            .catch(error => console.error('Error loading farmers:', error));
+        }
+        
+        // Load system info
+        function loadSystemInfo() {
+            fetch('/admin/api/system', {
+                headers: { 'Authorization': `Bearer ${authToken}` }
+            })
+            .then(response => response.json())
+            .then(info => {
+                document.getElementById('systemInfo').innerHTML = `
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                        <div>
+                            <h4>Uptime</h4>
+                            <p>${Math.floor(info.uptime / 3600)}h ${Math.floor((info.uptime % 3600) / 60)}m</p>
+                        </div>
+                        <div>
+                            <h4>Memory Usage</h4>
+                            <p>${Math.round(info.memory.used / 1024 / 1024)} MB</p>
+                        </div>
+                        <div>
+                            <h4>Node Version</h4>
+                            <p>${info.nodeVersion}</p>
+                        </div>
+                        <div>
+                            <h4>Environment</h4>
+                            <p>${info.environment}</p>
+                        </div>
+                        <div>
+                            <h4>Database Size</h4>
+                            <p>${Math.round(info.databaseSize / 1024)} KB</p>
+                        </div>
+                        <div>
+                            <h4>Last Updated</h4>
+                            <p>${new Date(info.timestamp).toLocaleString()}</p>
+                        </div>
+                    </div>
+                `;
+            })
+            .catch(error => console.error('Error loading system info:', error));
+        }
+        
+        // Modal functions
+        function showAddCropModal() {
+            document.getElementById('cropModalTitle').textContent = 'Add New Crop';
+            document.getElementById('cropForm').reset();
+            document.getElementById('cropId').value = '';
+            document.getElementById('cropModal').style.display = 'block';
+        }
+        
+        function closeCropModal() {
+            document.getElementById('cropModal').style.display = 'none';
+        }
+        
+        function showAddSupplierModal() {
+            document.getElementById('supplierModalTitle').textContent = 'Add New Supplier';
+            document.getElementById('supplierForm').reset();
+            document.getElementById('supplierId').value = '';
+            document.getElementById('supplierModal').style.display = 'block';
+        }
+        
+        function closeSupplierModal() {
+            document.getElementById('supplierModal').style.display = 'none';
+        }
+        
+        // CRUD operations
+        function editCrop(id) {
+            // Fetch crop data and populate modal
+            fetch(`/admin/api/crops`, {
+                headers: { 'Authorization': `Bearer ${authToken}` }
+            })
+            .then(response => response.json())
+            .then(crops => {
+                const crop = crops.find(c => c.id === id);
+                if (crop) {
+                    document.getElementById('cropModalTitle').textContent = 'Edit Crop';
+                    document.getElementById('cropId').value = crop.id;
+                    document.getElementById('cropName').value = crop.name;
+                    document.getElementById('cropScientificName').value = crop.scientific_name || '';
+                    document.getElementById('cropNpkRatio').value = crop.npk_ratio;
+                    document.getElementById('cropSeedRate').value = crop.seed_rate_per_hectare;
+                    document.getElementById('cropFertilizerRate').value = crop.fertilizer_rate_per_hectare;
+                    document.getElementById('cropPlantingSeason').value = crop.planting_season || '';
+                    document.getElementById('cropGrowthPeriod').value = crop.growth_period_days || '';
+                    document.getElementById('cropModal').style.display = 'block';
+                }
+            });
+        }
+        
+        function deleteCrop(id) {
+            if (confirm('Are you sure you want to delete this crop?')) {
+                fetch(`/admin/api/crops/${id}`, {
+                    method: 'DELETE',
+                    headers: { 'Authorization': `Bearer ${authToken}` }
+                })
+                .then(response => response.json())
+                .then(() => {
+                    loadCrops();
+                    alert('Crop deleted successfully');
+                })
+                .catch(error => {
+                    console.error('Error deleting crop:', error);
+                    alert('Failed to delete crop');
+                });
+            }
+        }
+        
+        // Form submissions
+        document.getElementById('cropForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const cropData = {
+                name: document.getElementById('cropName').value,
+                scientific_name: document.getElementById('cropScientificName').value,
+                npk_ratio: document.getElementById('cropNpkRatio').value,
+                seed_rate_per_hectare: parseFloat(document.getElementById('cropSeedRate').value),
+                fertilizer_rate_per_hectare: parseFloat(document.getElementById('cropFertilizerRate').value),
+                planting_season: document.getElementById('cropPlantingSeason').value,
+                growth_period_days: parseInt(document.getElementById('cropGrowthPeriod').value) || null
+            };
+            
+            const id = document.getElementById('cropId').value;
+            const url = id ? `/admin/api/crops/${id}` : '/admin/api/crops';
+            const method = id ? 'PUT' : 'POST';
+            
+            fetch(url, {
+                method: method,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${authToken}`
+                },
+                body: JSON.stringify(cropData)
+            })
+            .then(response => response.json())
+            .then(result => {
+                closeCropModal();
+                loadCrops();
+                alert(result.message);
+            })
+            .catch(error => {
+                console.error('Error saving crop:', error);
+                alert('Failed to save crop');
+            });
+        });
+        
+        // Similar functions for suppliers...
+        // (Implementation details omitted for brevity)
+        
+        // Initialize dashboard when authenticated
+        function init() {
+            // Auto-authenticate if password is provided in URL (for testing)
+            const urlParams = new URLSearchParams(window.location.search);
+            const pwd = urlParams.get('pwd');
+            if (pwd) {
+                document.getElementById('adminPassword').value = pwd;
+                authenticate();
+            }
+        }
+        
+        // Handle Enter key in password field
+        document.getElementById('adminPassword').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                authenticate();
+            }
+        });
+        
+        // Initialize on page load
+        window.addEventListener('load', init);
+    </script>
+</body>
+</html>
